@@ -1,28 +1,42 @@
-const http = require('http');
-const app = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-  if (req.url === '/') {
-    res.end('루트');
-  } else if (req.url === '/login') {
-    res.end('로그인');
-  }
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        여기는 루트입니다
+    </body>
+    </html>
+  `);
 });
 
-app.listen(3001, () => {
-  console.log('http로 서버 가동');
+app.get('/login', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input type="text" placeholder="아이디"/><br />
+        <input type="text" placeholder="비밀번호" /><br />
+        <button>로그인</button>
+    </body>
+    </html>
+  `);
 });
 
-// const express = require('express');
-// const app = express();
-
-// app.get('/', (req, res) => {
-//   res.send('루트');
-// });
-
-// app.get('/login', (req, res) => {
-//   res.send('로그인');
-// });
-
-// app.listen(3000, () => {
-//   console.log('서버 가동');
-// });
+app.listen(3000, () => {
+  console.log('서버 가동');
+});
